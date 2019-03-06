@@ -1,0 +1,18 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    artii (2.1.2)
+    minitest (5.11.3)
+    minitest-rg (5.2.0)
+      minitest (~> 5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  artii (~> 2.1)
+  minitest (~> 5.11)
+  minitest-rg (~> 5.2)
+
+BUNDLED WITH
+   2.0.1
