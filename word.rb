@@ -3,10 +3,13 @@ require('./character_library')
 class Word
 
     attr_reader :word, :filtered
-    def initialize(word)
+    def initialize()
+        @character_library = CharacterLibrary.new()
+    end
+
+    def set(word)
         @word = word.upcase
         @filtered = filter(word)
-        @character_library = CharacterLibrary.new()
     end
 
     def filter(word)

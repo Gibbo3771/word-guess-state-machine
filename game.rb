@@ -9,10 +9,11 @@ class Game
 
     attr_reader :game_state_manager
     attr_writer :running, :input
-    attr_accessor :player
+    attr_accessor :player, :word
 
     @running
     @player
+    @word
 
     def initialize()
         @game_state = :setup
