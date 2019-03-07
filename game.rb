@@ -1,22 +1,34 @@
-require('./word')
-require('./player')
-require 'date'
-require('./pretty_printer')
-require('./character_library')
+require_relative('./word')
+require_relative('./player')
+require_relative('./pretty_printer')
+require_relative('./state/state_manager')
+require_relative('./state/game_states/setup_state')
+require_relative('./state/render_states/setup_render_state')
 
 class Game
 
-    attr_reader :running
+    attr_reader :game_state_manager
+    attr_writer :running, :input
+    attr_accessor :player
+
+    @running
+    @player
+
     def initialize()
-        @running = true
         @game_state = :setup
-        @player = Player.new("Stephen")
-        @input = ""
         @drawables = []
         @first_pretty_print = true
+
+        @game_state_manager = StateManager.new(self)
+        @game_state_manager.change_state(SetupRenderState.new())
+
     end
 
     def update()
+        while true do
+            # @render_state_manager.update()
+            @game_state_manager.update()
+        end
         while @running do
             draw()
             case @game_state
