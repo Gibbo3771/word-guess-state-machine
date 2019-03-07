@@ -17,7 +17,7 @@ class GuessRenderState < RenderState
     def update(state_manager, game)
         clear()
         super(state_manager, game)
-        state_manager.change_state(GuessState.new("Stephen"))
+        state_manager.change_state(GuessState.new())
     end
 
 end
