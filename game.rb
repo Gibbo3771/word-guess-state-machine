@@ -2,6 +2,7 @@ require('./word')
 require('./player')
 require 'date'
 require('./pretty_printer')
+require('./character_library')
 
 class Game
 
@@ -22,10 +23,13 @@ class Game
             when :setup
                 new_game()
             when :guess
-                input, input_valid = get_input()
+                @input, input_valid = get_input()
                 if input_valid
-                    @game_state = @word.try_to_match_and_replace(input) ? :found : :not_found
+                    @game_state = @word.try_to_match_and_replace(@input)
                 end
+            when :guess_already_tried
+                sleep 1.5
+                @game_state = :guess
             when :found
                 sleep 1.5
                 @game_state = :check_win_condition
@@ -44,11 +48,11 @@ class Game
                     @game_state = :guess
                 end
             when :won
-                input, input_valid = get_input()
-                @game_state = input.upcase() == "Y" ? :setup : :exiting
+                @input, input_valid = get_input()
+                @game_state = @input.upcase() == "Y" ? :setup : :exiting
             when :lost
-                input, input_valid = get_input()
-                @game_state = input.upcase() == "Y" ? :setup : :exiting
+                @input, input_valid = get_input()
+                @game_state = @input.upcase() == "Y" ? :setup : :exiting
             when :exiting
                 @running = false
             end
@@ -57,8 +61,8 @@ class Game
     end
 
     def new_game()
-        input, input_valid = get_input()
-        @word = Word.new(input)
+        @input, input_valid = get_input()
+        @word = Word.new(@input)
         @game_state = :guess
         @player = Player.new(@player.name)
         first_pretty_print = true
@@ -86,12 +90,14 @@ class Game
                 pretty_print("Guess a letter", 0.05)
                 print "> "
             })
+        when :guess_already_tried
+            @drawables.push(-> {pretty_print("Already tried to guess #{@input}!", 0.05)})
         when :found
             @drawables.push(-> {puts "Secret word - #{@word.filtered}"})
             @drawables.push(-> {pretty_print("Nice!", 0.05)})
         when :not_found
-            @drawables.push(-> {pretty_print("Secret word - #{@word.filtered}", 0.05)})
-            @drawables.push(-> {pretty_print("Oops #{", try again!" unless @player.has_lifes?()}", 0.05)})
+            @drawables.push(-> {pretty_print("Secret word - #{@word.filtered}", @first_pretty_print ? 0.05 : 0)})
+            @drawables.push(-> {pretty_print("Oops #{", try again!" if @player.has_lifes?()}", 0.05)})
         when :won
             @drawables.push(-> {pretty_print( "Secret word - #{@word.filtered}", 0.05)})
             @drawables.push(-> {pretty_print( "You won!", 0.05)})
@@ -117,6 +123,7 @@ class Game
         @drawables.push(-> {
             pretty_print("Lives: #{@player.get_total_lifes()}", 0)
         })
+        
     end
 
     def clear()
