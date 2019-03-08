@@ -11,3 +11,7 @@ gem "artii", "~> 2.1"
 gem "minitest", "~> 5.11"
 
 gem "minitest-rg", "~> 5.2"
+
+gem "pry", "~> 0.12.2"
+
+gem "pry-coolline", "~> 0.2.5"

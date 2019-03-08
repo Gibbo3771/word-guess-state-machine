@@ -2,14 +2,14 @@ require_relative('../state')
 
 class GetInputState < State
 
-    def initialize(validation_state)
-        @validation_state = validation_state
+    def initialize(validation)
+        @validation = validation
     end
 
     def update(state_manager, game)
+        set_exiting()
         input = gets.chomp
-        @validation_state.set_input(input)
-        state_manager.change_state(@validation_state)
+        @validation.call(input)
     end
 
 end

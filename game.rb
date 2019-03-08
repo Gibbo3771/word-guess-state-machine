@@ -3,7 +3,6 @@ require_relative('./player')
 require_relative('./pretty_printer')
 require_relative('./state/state_manager')
 require_relative('./state/game_states/setup_state')
-require_relative('./state/render_states/setup_render_state')
 
 class Game
 
@@ -18,10 +17,8 @@ class Game
     def initialize()
         @game_state = :setup
         @drawables = []
-        @first_pretty_print = true
-
         @game_state_manager = StateManager.new(self)
-        @game_state_manager.change_state(SetupRenderState.new())
+        @game_state_manager.change_state(SetupState.new("Stephen"))
 
     end
 
