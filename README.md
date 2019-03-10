@@ -12,3 +12,11 @@ Results of this:
 * No logical depedencies between states unless specificailly designed like so (See any class that requires input)
 * Easily add new states and slot them in where required
 * Bugs are easy to track down and fix
+
+## Installing
+
+If you don't have bundler, run `gem install bundler`.
+
+Then (from the project directory) `bundle install`.
+
+Now you can run `ruby main.rb`.
