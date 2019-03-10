@@ -1,4 +1,6 @@
 require_relative('./guess_state')
+require_relative('./won_state')
+require_relative('./lost_state')
 require_relative('../state')
 
 class EvaluateWinConditionState < State
@@ -13,11 +15,13 @@ class EvaluateWinConditionState < State
     def update(state_manager, game)
         super
         if game.word.fully_revealed?()
-            # Enter win state
+            set_exiting()
+            state_manager.change_state(WonState.new())
         elsif !(game.player.has_lifes?())
-            # Enter lose state
+            state_manager.change_state(LostState.new())
+        else
+            state_manager.change_state(GuessState.new())    
         end
-        state_manager.change_state(GuessState.new())
     end
 
     def exit(state_manager, game)

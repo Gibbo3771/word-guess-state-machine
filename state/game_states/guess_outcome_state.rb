@@ -11,6 +11,9 @@ class GuessOutcomeState < RenderState
         super
         clear_terminal()
         add(-> {
+            pretty_print("Lifes: #{game.player.get_current_lifes()}")
+        })
+        add(-> {
             pretty_print("Secret word - #{game.word.filtered}")
         })
         add(-> {

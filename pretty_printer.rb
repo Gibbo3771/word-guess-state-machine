@@ -26,9 +26,3 @@ def pretty_print_yoyo(word, speed=0, start_printed=true)
     pretty_print(word, speed)
     pretty_print_reverse(word, speed)    
 end
-
-while true do
-sleep 0.5
-pretty_print_yoyo("Hello bawbag!", 0.05, true)
-sleep 0.5
-end

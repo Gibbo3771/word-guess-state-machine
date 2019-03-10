@@ -3,10 +3,6 @@ require_relative('../state')
 
 class SetupState < State
 
-    def initialize(player_name)
-        @player_name = player_name
-    end
-
     def pre_enter(state_manager, game)
         enter(state_manager, game)
     end

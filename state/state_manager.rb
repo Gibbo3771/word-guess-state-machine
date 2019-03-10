@@ -40,4 +40,10 @@ class StateManager
         return @stack.pop()
     end
 
+    def clean_up_states()
+        @stack.each { | state | state.exit(self, @game)}
+        @stack.clear()
+        @current_state = nil
+    end
+
 end

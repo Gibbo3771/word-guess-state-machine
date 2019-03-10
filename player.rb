@@ -3,15 +3,15 @@ class Player
     attr_reader :name
     def initialize(name)
         @name = name
-        @lifes = 6
+        @lifes = 1
     end
 
     def has_lifes?
-        return @lifes > 0
+        return @lifes >= 0
     end
 
-    def get_total_lifes
-        return @lifes
+    def get_current_lifes
+        return @lifes < 0 ? 0 : @lifes
     end
     
     def decrease_lifes

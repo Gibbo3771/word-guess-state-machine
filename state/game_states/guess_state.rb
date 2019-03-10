@@ -13,6 +13,9 @@ class GuessState < RenderState
         super
         clear_terminal()
         add(-> {
+            pretty_print("Lifes: #{game.player.get_current_lifes()}")
+        })
+        add(-> {
             pretty_print("Secret word - #{game.word.filtered}")
         })
         add(-> {
@@ -30,6 +33,7 @@ class GuessState < RenderState
             case return_code
             when :not_found
                 state_manager.change_state(GuessOutcomeState.new("Oops! Didn't find the letter #{@input}."))
+                game.player.decrease_lifes()
             when :found
                 state_manager.change_state(GuessOutcomeState.new("Nice! Found #{@input}."))
             when :tried
