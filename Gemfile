@@ -11,5 +11,3 @@ gem "minitest", "~> 5.11"
 gem "minitest-rg", "~> 5.2"
 
 
-
-gem "sqlite3", "~> 1.4"
