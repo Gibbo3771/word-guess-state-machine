@@ -1,5 +1,3 @@
-require('./character_library')
-
 class Word
 
     attr_reader :unfiltered, :filtered

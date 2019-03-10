@@ -1,5 +1,4 @@
-require_relative('../render_state')
-require_relative('./guess_outcome_state')
+require_relative '../state/render_state'
 
 class GuessState < RenderState
 

@@ -1,16 +1,14 @@
-require_relative('../../pretty_printer')
-require_relative('../render_state')
-require_relative('./play_again_state')
+require_relative '../state/render_state'
 
-class WonState < RenderState
+class LostState < RenderState
 
     def pre_enter(state_manager, game)
         clear_terminal()
         add(-> {
-            pretty_print("Secret word - #{game.word.filtered}")
+            pretty_print("Secret word - #{game.word.unfiltered}")
         })
         add(-> {
-            pretty_print("Yay! You won. Congrats!", 0.075)
+            pretty_print("Oh no, you ran out of lifes :(!", 0.075)
             print "> "
         })
     end

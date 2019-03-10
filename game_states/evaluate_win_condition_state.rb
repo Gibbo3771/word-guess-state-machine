@@ -1,7 +1,4 @@
-require_relative('./guess_state')
-require_relative('./won_state')
-require_relative('./lost_state')
-require_relative('../state')
+require_relative '../state/state'
 
 class EvaluateWinConditionState < State
 
@@ -18,6 +15,7 @@ class EvaluateWinConditionState < State
             set_exiting()
             state_manager.change_state(WonState.new())
         elsif !(game.player.has_lifes?())
+            set_exiting()
             state_manager.change_state(LostState.new())
         else
             state_manager.change_state(GuessState.new())    

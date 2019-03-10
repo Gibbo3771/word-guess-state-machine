@@ -1,11 +1,3 @@
-require_relative('./word')
-require_relative('./player')
-require_relative('./pretty_printer')
-require_relative('./state/state_manager')
-require_relative('./state/game_states/setup_state')
-
-require 'sqlite3'
-
 class Game
 
     attr_reader :game_state_manager

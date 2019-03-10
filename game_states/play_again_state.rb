@@ -1,8 +1,11 @@
-require_relative('../../pretty_printer')
-require_relative('../render_state')
-require_relative('./get_input_state')
+require_relative '../state/render_state'
 
 class PlayAgainState < RenderState
+
+    def initialize()
+        super
+        @input = nil
+    end
 
     def pre_enter(state_manager, game)
         clear_terminal()
@@ -18,11 +21,15 @@ class PlayAgainState < RenderState
             state_manager.change_state(GetInputState.new(-> (input) {set_input(input)}))
             return
         end
-        state_manager.clean_up_states()
+        puts @input
+        sleep 2
         if @input == "y"
-            state_manager.change_state(SetupState.new("Stephen"))
+            state_manager.clean_up_states()
+            state_manager.change_state(SetupState.new())
         elsif @input == "n"
+            state_manager.clean_up_states()
             game.running = false
+            set_exiting()
         end
     end
 
@@ -31,7 +38,7 @@ class PlayAgainState < RenderState
     end
 
     def valid?()
-        return if @input == nil
+        return false if @input == nil
         return true if @input == "y" || @input == "n"
         return false
     end

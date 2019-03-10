@@ -1,4 +1,4 @@
-require_relative('../state')
+require_relative '../state/state'
 
 class GetInputState < State
 

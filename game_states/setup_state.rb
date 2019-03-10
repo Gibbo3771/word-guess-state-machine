@@ -1,14 +1,8 @@
-require_relative('./enter_secret_state')
-require_relative('../state')
+require_relative '../state/state'
 
 class SetupState < State
 
     def pre_enter(state_manager, game)
-        enter(state_manager, game)
-    end
-
-    def enter(state_manager, game)
-        super
         game.running = true
         game.player = Player.new(@player_name)
         game.word = Word.new()

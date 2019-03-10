@@ -1,7 +1,4 @@
-require_relative('../../pretty_printer')
-require_relative('../render_state')
-require_relative('./get_input_state')
-require_relative('./evaluate_win_condition_state')
+require_relative '../state/render_state'
 
 class EnterSecretState < RenderState
 
